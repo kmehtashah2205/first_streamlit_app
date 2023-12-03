@@ -5,16 +5,13 @@ import requests
 from urllib.error import URLError
 
 streamlit.title('My Moms New Healthy Diner')
-
 streamlit.header('Breakfast Favourites')
-
 streamlit.text('🥣Omega 3 & Blueberry Oatmeal')
 streamlit.text('🥗Kale, Spinach & Rocket Smotthie')
 streamlit.text('🐔Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞Avacado Toast')
 
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-
 
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -23,7 +20,6 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
-
 
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" +this_fruit_choice)
@@ -69,7 +65,7 @@ if streamlit.button('Get Fruit Load List'):
 # Function to insert a new fruit
 def insert_row_snowflake(new_fruit):
     with my_cnx.cursor() as my_cur:
-        my_cur.execute("INSERT INTO fruit_load_list VALUES (%s)", (new_fruit,))
+        my_cur.execute("INSERT INTO fruit_load_list VALUES('"+Jackfruit+"')")
         return "Thanks for adding " + new_fruit
 
 # Input for adding a new fruit
